@@ -1,0 +1,12 @@
+const fs=require('fs'),path=require('path');
+const out=process.argv[2],balloon=process.argv[3];
+let s=fs.readFileSync('index.html','utf8');
+s=s.replaceAll('n<20','n<activities.length').replaceAll('van de 20','van de 21').replaceAll('van 20','van 21').replaceAll('used.size===20','used.size===21').replaceAll('Alle 20','Alle 21').replaceAll('twintig ballonnen','eenentwintig ballonnen').replaceAll('Twintig verrassingsballonnen','Eenentwintig verrassingsballonnen');
+s=s.replace("if(a[4]==='disco')choiceButton('Open de dansvloer',startDisco);",`if(a[4]==='disco'){const link=document.createElement('a');link.className='primary secondary';link.textContent='♫ Open de discomuziek';link.href='https://www.yurls.net/page/1140104#boxes-container';link.target='_blank';link.rel='noopener noreferrer';$('actions').append(link);choiceButton('🪩',startDisco);}`);
+s=s.replace("background:var(--cream) url('feestachtergrond.png') center/cover",`background-color:var(--cream);background-image:url('data:image/png;base64,${fs.readFileSync(path.join(out,'feestachtergrond.png')).toString('base64')}');background-position:center;background-size:cover`);
+s=s.replace('</style>',fs.readFileSync('flying.css','utf8')+'\n'+fs.readFileSync('centered-title.css','utf8')+'\n</style>');
+const js=fs.readFileSync('flying.js','utf8').replace('BALLOON_DATA_URL','data:image/png;base64,'+fs.readFileSync(balloon).toString('base64'));
+s=s.replace('</body>',()=>'<script>'+js+'</script></body>');
+fs.writeFileSync(path.join(out,'Ballonnenfeest-Dennis-50.html'),s);
+fs.writeFileSync(path.join(out,'index.html'),s);
+console.log('Built flying balloon presentation.');
