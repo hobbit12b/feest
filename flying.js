@@ -1,5 +1,8 @@
 // Keep all original activities and teacher controls, replace the children's view.
 const balloonArt='BALLOON_DATA_URL';
+const plopAudio=new Audio('PLOP_DATA_URL');
+plopAudio.preload='auto';
+popSound=function(){if(!sound)return;plopAudio.currentTime=0;plopAudio.play().catch(()=>{})};
 const shortTitles=['Stopdans!','Confetti!','Disco!','Polonaise!','Toveren!','Cadeautje!','De kroon!','Hoepeldans!','Wat is weg?','Zoeken!','Simsala Saartje!','Welke beker?','Bewegen!','Woef, woef!','Samen!','Hooghouden!','Raad maar!','De meester!','Verstoppertje!','Bellen!','Kleurenstopdans!'];
 const bigIcons=['🕺','🎊','🪩','🥳','🪄','🎁','👑','⭕','🎁 ❓','🎁 👏','🫧 🐷','🥤 🥤 🥤','🐾','🐶 🎵','🎈 👫','🙌 🎈','🎭','👨‍🏫 ❓','🙈','🫧','🌈 🕺'];
 let flights=[],flightFrame,lastTime=performance.now(),queueIndex=0,revealTimer;
